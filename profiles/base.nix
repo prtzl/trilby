@@ -20,6 +20,7 @@
     [
 
     ] ++ lib.optionals (trilby.edition == "workstation") [
+      fastfetch
       bat
       btop
       eza

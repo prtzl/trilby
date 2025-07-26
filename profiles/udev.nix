@@ -1,12 +1,9 @@
 { pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [ stlink tio lm_sensors ];
+
   services.udev = {
-    packages = with pkgs; [
-      stlink
-      tio
-      # jlink
-    ];
     extraRules = ''
       # Add all USB devices to usb group -> don't forget with your user
       KERNEL=="*", SUBSYSTEMS=="usb", MODE="0664", GROUP="usb"

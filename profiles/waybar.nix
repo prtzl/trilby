@@ -44,7 +44,7 @@ let
 
   # Temperatures
   temps = {
-    poli = [ "cpu_temp" "water_temp" "gpu_temp" "motherboard_temp" ];
+    poli = [ "cpu_temp" "gpu_temp" "water_temp" "motherboard_temp" ];
     nixbox = [ "cpu_temp" "gpu_temp" ];
     nixtop = [ "cpu_temp" ];
   };
@@ -55,13 +55,17 @@ let
         ""
       else if path == "gpu_temp" then
         "🏭"
+      else if path == "water_temp" then
+        "🌊"
+      else if path == "motherboard_temp" then
+        "🎂"
       else
-        "💧"; # fallback/default
+        "🌡️"; # fallback/default
     in {
       "temperature#${builtins.toString index}" = {
         format = "${icon} {temperatureC}°C";
         hwmon-path = [ "/dev/${path}" ];
-        interval = 5;
+        interval = 2;
         tooltip-format = "${path}: {temperatureC}°C";
       };
     };
@@ -85,6 +89,8 @@ let
         "#982daf"
       else if name == "water_temp" then
         "#3385e6"
+      else if name == "motherboard_temp" then
+        "#982daf"
       else
         "#ffffff"; # fallback/default
     in ''
