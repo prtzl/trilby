@@ -2,7 +2,7 @@
 
 {
   imports = with (lib.findModules ../../profiles);
-    [ ranger shell tio tmux zsh nvim ]
+    [ ranger tio tmux zsh nvim ]
     ++ lib.optionals (trilby.edition == "workstation")
     (with (lib.findModules ../../profiles); [
       alacritty

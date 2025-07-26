@@ -102,31 +102,8 @@ in {
     '';
   };
 
-  home.file.".zprofile".text = ''
-    # Source global profile
-    [[ -e "$HOME/.profile" ]] && emulate sh -c 'source $HOME/.profile'
-    # Launch DE on non-nixos if available
-    if [ ! -d "/etc/nixos" ]; then
-      if [ -f "$HOME/.startx.home" ]; then
-        source $HOME/.startx.home
-      fi
-    fi
-  '';
-
   home.sessionVariables = {
     NIXPKGS_ALLOW_UNFREE = 1;
     TERM = "xterm-256color";
   };
-
-  # home.file.".profile.home" = lib.mkIf (homeArgs ? notNixos ? homeArgs.notNixos) {
-  #   text = ''
-  #     # This file should be sourced by ~/.profile
-  #     # This is currently just for non-nixos platforms
-  #     # Options for non-nixos systems
-  #     if [ ! -d "/etc/nixos" ]; then
-  #     export PATH=$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH
-  #     export XDG_DATA_DIRS=$HOME/.nix-profile/share:$HOME/.share:"''${XDG_DATA_DIRS:-/usr/local/share/:/usr/share/}"
-  #     fi
-  #   '';
-  # };
 }
