@@ -1,4 +1,5 @@
-configName: { lib, pkgs, ... }:
+configName:
+{ lib, pkgs, ... }:
 
 let
   # Load base configs, we'll add device specific configs to these
@@ -43,7 +44,7 @@ let
 
   # Temperatures
   temps = {
-    poli = ["cpu_temp" "water_temp" "gpu_temp"];
+    poli = [ "cpu_temp" "water_temp" "gpu_temp" ];
     nixbox = [ "cpu_temp" "gpu_temp" ];
     nixtop = [ "cpu_temp" ];
   };
@@ -65,7 +66,7 @@ let
       };
     };
 
-  selectedTemps = temps.${configName} or [];
+  selectedTemps = temps.${configName} or [ ];
 
   tempConfigNames =
     lib.lists.imap1 (index: name: "temperature#${builtins.toString index}")
@@ -111,7 +112,7 @@ let
     };
   };
 
-  selectedDisks = ["/"] ++ disks.${configName} or [];
+  selectedDisks = [ "/" ] ++ disks.${configName} or [ ];
 
   diskConfigNames =
     lib.lists.imap1 (index: name: "disk#${builtins.toString index}")
@@ -158,7 +159,7 @@ let
   };
 
   # selectedInterfaces = interfaces.nixtop; # for testing
-  selectedInterfaces = interfaces.${configName} or [];
+  selectedInterfaces = interfaces.${configName} or [ ];
 
   # Create list of network interfaces
   networkConfigNames =
@@ -190,8 +191,8 @@ let
     firstBase = lib.lists.take 4 original;
     # Leaves with pulse
     secondBase = lib.lists.take 1 (lib.lists.drop 4 original);
-  in firstBase ++ tempConfigNames ++ diskConfigNames ++ networkConfigNames ++
-  batteryConfigNames ++ secondBase;
+  in firstBase ++ tempConfigNames ++ diskConfigNames ++ networkConfigNames
+  ++ batteryConfigNames ++ secondBase;
 
   # Write new config and style
   config = baseconfig // {
@@ -205,7 +206,7 @@ in {
     package = pkgs.waybar;
     systemd.enable = true;
     systemd.target = "hyprland-session.target";
-    settings = [config];
+    settings = [ config ];
     style = style;
   };
 }

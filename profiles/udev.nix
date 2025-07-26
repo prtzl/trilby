@@ -4,7 +4,7 @@
   services.udev = {
     packages = with pkgs; [
       stlink
-      tio 
+      tio
       # jlink
     ];
     extraRules = ''
@@ -16,6 +16,6 @@
 
       # Somehow added jlink file to udev does not get picked up :/
     '';
-      # ${builtins.readFile "${pkgs.jlink}/lib/udev/rules.d/99-jlink.rules"}
+    # ${builtins.readFile "${pkgs.jlink}/lib/udev/rules.d/99-jlink.rules"}
   };
 }

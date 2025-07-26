@@ -1,11 +1,12 @@
-{trilby, inputs, local, lib, pkgs, ...}:
+{ trilby, inputs, local, lib, pkgs, ... }:
 
 {
   nix.registry.stable.flake = local.nixpkgs;
   nix.registry.unstable.flake = inputs.nixpkgs-unstable;
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs;
+    [
 
-  ] ++ lib.optionals (trilby.edition == "workstation") [
+    ] ++ lib.optionals (trilby.edition == "workstation") [
       fd
       eza
       ripgrep
@@ -18,5 +19,5 @@
       xh
       bat
       btop
-    ]  ;
+    ];
 }

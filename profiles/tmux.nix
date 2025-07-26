@@ -2,8 +2,7 @@
 
 { pkgs, ... }:
 
-let
-  resurrectDirPath = "~/.config/tmux/resurrect";
+let resurrectDirPath = "~/.config/tmux/resurrect";
 in {
   programs.tmux = {
     enable = true;

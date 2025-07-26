@@ -6,7 +6,12 @@
       content = {
         type = "gpt";
         partitions = {
-          boot = { label = "boot"; size = "1M"; type = "EF02"; priority = 0; };
+          boot = {
+            label = "boot";
+            size = "1M";
+            type = "EF02";
+            priority = 0;
+          };
           EFI = {
             label = "EFI";
             size = "1G";

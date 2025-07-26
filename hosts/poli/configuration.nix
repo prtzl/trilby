@@ -1,19 +1,14 @@
 { local, lib, ... }:
 
 {
-  imports = [ 
+  imports = [
     local.nixos-hardware.nixosModules.common-cpu-amd
     local.nixos-hardware.nixosModules.common-gpu-intel
     local.nixos-hardware.nixosModules.common-pc
     local.nixos-hardware.nixosModules.common-pc-ssd
     local.nvimnix.nixosModules.nvimnix
     ../../users/matej
-  ] ++ (with (lib.findModules ../../profiles); [
-      base
-      udev
-      virt
-      fonts
-    ]);
+  ] ++ (with (lib.findModules ../../profiles); [ base udev virt fonts ]);
   programs.nvimnix.enable = true;
   networking.hostName = "poli";
   services.xserver.xkb.layout = "us";

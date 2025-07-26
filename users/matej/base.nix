@@ -1,23 +1,18 @@
-{ trilby, lib, pkgs, ...}:
+{ trilby, lib, pkgs, ... }:
 
 {
   imports = with (lib.findModules ../../profiles);
-    [
-      ranger
-      shell
-      tio
-      tmux
-      zsh
-      nvim
-    ] ++ lib.optionals (trilby.edition == "workstation") (with (lib.findModules ../../profiles); [
+    [ ranger shell tio tmux zsh nvim ]
+    ++ lib.optionals (trilby.edition == "workstation")
+    (with (lib.findModules ../../profiles); [
       alacritty
       dunst
       hyprland
       themes
       (import waybar "poli")
     ]);
-  home.packages = with pkgs.unstable; [
-  ] ++ lib.optionals (trilby.edition == "workstation") [
+  home.packages = with pkgs.unstable;
+    [ ] ++ lib.optionals (trilby.edition == "workstation") [
       # browser
       ungoogled-chromium
 
