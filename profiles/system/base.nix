@@ -1,7 +1,7 @@
 { trilby, inputs, local, lib, pkgs, ... }:
 
 {
-  imports = [ ./udev.nix ./virt.nix ./fonts.nix ];
+  imports = with (lib.findModules ./.); [ udev virt fonts ];
 
   nix = {
     monitored.notify = false;
@@ -20,10 +20,10 @@
     [
 
     ] ++ lib.optionals (trilby.edition == "workstation") [
-      fastfetch
       bat
       btop
       eza
+      fastfetch
       fd
       fd
       ffmpeg-full

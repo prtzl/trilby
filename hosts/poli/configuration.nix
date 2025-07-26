@@ -8,7 +8,7 @@
     local.nixos-hardware.nixosModules.common-pc-ssd
     local.nvimnix.nixosModules.nvimnix
     ../../users/matej
-  ] ++ (with (lib.findModules ../../profiles); [ base ]);
+  ] ++ (with (lib.findModules ../../profiles/system); [ base ]);
 
   networking.hostName = "poli";
   services.xserver.xkb.layout = "us";

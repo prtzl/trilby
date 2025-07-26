@@ -1,15 +1,15 @@
 { trilby, lib, pkgs, ... }:
 
 {
-  imports = with (lib.findModules ../../profiles);
-    [ ranger tio tmux zsh nvim ]
-    ++ lib.optionals (trilby.edition == "workstation")
-    (with (lib.findModules ../../profiles); [
+  imports = with (lib.findModules ../../profiles/home);
+    [ base ] ++ lib.optionals (trilby.edition == "workstation")
+    (with (lib.findModules ../../profiles/home); [
+      (import waybar "poli")
       alacritty
       dunst
       hyprland
       themes
-      (import waybar "poli")
+      tio
     ]);
 
   home.packages = with pkgs.unstable;
