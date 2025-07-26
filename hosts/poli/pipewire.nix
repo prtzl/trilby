@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [ qpwgraph ];
 
   security.rtkit.enable = true;
-  services.pipewire = {
+  services.pipewire = lib.mkForce {
     enable = true;
     pulse.enable = true;
     jack.enable = true;

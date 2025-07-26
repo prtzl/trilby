@@ -1,10 +1,10 @@
 { lib, ... }:
 
 {
-  programs.starship = {
+  programs.starship = lib.mkForce {
     enable = true;
     enableZshIntegration = true;
-    settings = lib.mkForce {
+    settings = {
       command_timeout = 50; # It's very noticable and anoying beyond this
       add_newline = false;
       character = {

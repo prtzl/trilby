@@ -18,7 +18,7 @@ in {
     zsh-completions
   ];
 
-  programs.direnv = {
+  programs.direnv = lib.mkForce {
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
@@ -40,7 +40,7 @@ in {
 
       # Programs
       pdf = "evince";
-      img = "eog";
+      img = "";
       play = "celluloid";
       sl = "sl -ead -999";
       vim = "nvim";
@@ -58,8 +58,13 @@ in {
     };
 
     history = {
-      ignoreDups = true;
       expireDuplicatesFirst = true;
+      ignoreAllDups = true;
+      ignoreDups = true;
+      ignoreSpace = true;
+      save = 100000;
+      share = true;
+      size = 100000;
     };
 
     initContent = ''
@@ -99,6 +104,10 @@ in {
       export PATH=$PATH:/usr/sbin:/usr/local/sbin
 
       export DIRENV_LOG_FORMAT=""
+
+      viewimage() {
+        gthumb "''${@:-.}" >/dev/null 2>&1 & disown
+      }
     '';
   };
 
