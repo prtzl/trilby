@@ -1,16 +1,7 @@
 { trilby, lib, pkgs, ... }:
 
 {
-  imports = with (lib.findModules ../../profiles/home);
-    [ base ] ++ lib.optionals (trilby.edition == "workstation")
-    (with (lib.findModules ../../profiles/home); [
-      (import waybar "poli")
-      alacritty
-      dunst
-      hyprland
-      themes
-      tio
-    ]);
+  imports = with (lib.findModules ../../profiles/home); [ base base-machine ];
 
   home.packages = with pkgs.unstable;
     [ ] ++ lib.optionals (trilby.edition == "workstation") [
