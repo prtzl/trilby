@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
-  qt = {
+  qt = lib.mkForce {
     enable = true;
     platformTheme.name = "gtk";
   };
@@ -9,7 +9,7 @@
   gtk = let
     tooltipTimeout = 100;
     gtkExtraConfig = { gtk-tooltip-timeout = tooltipTimeout; };
-  in {
+  in lib.mkForce {
     enable = true;
     theme = {
       name = "Materia-dark";
@@ -30,7 +30,7 @@
     gtk4.extraConfig = gtkExtraConfig;
   };
 
-  dconf.settings = {
+  dconf.settings = lib.mkForce {
     "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
   };
 }

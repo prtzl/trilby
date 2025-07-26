@@ -8,18 +8,23 @@
     local.nixos-hardware.nixosModules.common-pc-ssd
     local.nvimnix.nixosModules.nvimnix
     ../../users/matej
-  ] ++ (with (lib.findModules ../../profiles); [ base udev virt fonts ]);
-  programs.nvimnix.enable = true;
+  ] ++ (with (lib.findModules ../../profiles); [ base ]);
+
   networking.hostName = "poli";
   services.xserver.xkb.layout = "us";
   i18n.defaultLocale = "en_GB.UTF-8";
   time.timeZone = lib.mkForce "Europe/Zurich";
   systemd.network.wait-online.extraArgs = [ "--interface=enp13s0" ];
-  nix.settings = {
-    # max-jobs = maximum packages built at once
-    max-jobs = 16;
-    # cores = maximum threads used by a job/package
-    cores = 2;
+
+  nix = {
+    settings = {
+      # max-jobs = maximum packages built at once
+      max-jobs = 16;
+      # cores = maximum threads used by a job/package
+      cores = 2;
+    };
   };
 
+  # This should be done with home module, but I cant import this
+  programs.nvimnix.enable = true;
 }

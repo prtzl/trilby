@@ -203,7 +203,7 @@ let
 in {
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar;
+    package = pkgs.unstable.waybar;
     systemd.enable = true;
     systemd.target = "hyprland-session.target";
     settings = [ config ];
