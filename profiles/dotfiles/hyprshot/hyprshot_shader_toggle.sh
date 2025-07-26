@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 options=("$@")
 
 active=$(hyprshade current)
@@ -7,7 +5,8 @@ if [ -n "$active" ]; then
     hyprshade off
 fi
 
-hyprshot "${options[@]}"
+# Somehow hyprshot returns 1 with -m output --clipboard-only
+hyprshot "${options[@]}" || true
 
 if [ -n "$active" ]; then
     hyprshade on "$active"
