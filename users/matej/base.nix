@@ -11,6 +11,7 @@
       themes
       (import waybar "poli")
     ]);
+
   home.packages = with pkgs.unstable;
     [ ] ++ lib.optionals (trilby.edition == "workstation") [
       # browser
@@ -38,4 +39,10 @@
       # Communication
       signal-desktop
     ];
+
+  programs.git = {
+    userName = "prtzl";
+    userEmail = "matej.blagsic@protonmail.com";
+    extraConfig = { core = { init.defaultBranch = "master"; }; };
+  };
 }
