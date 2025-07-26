@@ -1,6 +1,5 @@
-{ local, ... }:
+{ lib, ... }:
 
 {
-  # inputs = [ local.nvimnix.nixosModules.home ];
-  # programs.nvimnix.enable = true;
+  programs.nixvim.enable = lib.mkForce false;
 }

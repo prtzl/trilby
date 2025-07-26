@@ -3,12 +3,12 @@
 {
   imports = with (lib.findModules ../../profiles);
     [
-      nvim
       ranger
       shell
       tio
       tmux
       zsh
+      nvim
     ] ++ lib.optionals (trilby.edition == "workstation") (with (lib.findModules ../../profiles); [
       alacritty
       dunst

@@ -1,4 +1,4 @@
-{ local, lib, pkgs, ... }:
+{ local, lib, ... }:
 
 {
   imports = [ 
@@ -6,13 +6,15 @@
     local.nixos-hardware.nixosModules.common-gpu-intel
     local.nixos-hardware.nixosModules.common-pc
     local.nixos-hardware.nixosModules.common-pc-ssd
-    local.nvimnix.nixosModules.nixos
+    local.nvimnix.nixosModules.nvimnix
     ../../users/matej
-    ../../profiles/base.nix
-    ../../profiles/udev.nix
-    ../../profiles/virt.nix
-  ];
-  programs.nvimnix.enable= true;
+  ] ++ (with (lib.findModules ../../profiles); [
+      base
+      udev
+      virt
+      fonts
+    ]);
+  programs.nvimnix.enable = true;
   networking.hostName = "poli";
   services.xserver.xkb.layout = "us";
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -25,21 +27,4 @@
     cores = 2;
   };
 
-  fonts = lib.mkForce {
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        serif = [ "Noto Serif" ];
-        sansSerif = [ "Noto Sans" ];
-        monospace = [ "FiraCode Nerd Font" ];
-      };
-    };
-    fontDir.enable = true;
-    packages = with pkgs; [
-      nerd-fonts.fira-code
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-    ];
-  };
 }
