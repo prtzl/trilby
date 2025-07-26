@@ -44,7 +44,7 @@ let
 
   # Temperatures
   temps = {
-    poli = [ "cpu_temp" "water_temp" "gpu_temp" ];
+    poli = [ "cpu_temp" "water_temp" "gpu_temp" "motherboard_temp" ];
     nixbox = [ "cpu_temp" "gpu_temp" ];
     nixtop = [ "cpu_temp" ];
   };

@@ -11,8 +11,12 @@
         # 5: Copy pase bottom code and either use vendor/product id, name, or whatever else. For various temperatures be sure to rename the link under which it will be available!
         # Ryzen 9 9950x on Asrock x870 Pro rs
         ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x1022", ATTRS{device}=="0x14e3", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp1_input /dev/cpu_temp'"
-        # Temperature sensor for water temperature, maybe?
-        ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x1022", ATTRS{device}=="0x790b", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp1_input /dev/water_temp'"
+
+        # External temperature sensor AUXTIN5 on nct6779 platform (mobo sensors)
+        ACTION=="add", SUBSYSTEM=="hwmon", KERNEL=="hwmon*", ATTRS{name}=="nct6779", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp9_input /dev/water_temp'"
+
+        # External temperature sensor AUXTIN5 on nct6779 platform (mobo sensors)
+        ACTION=="add", SUBSYSTEM=="hwmon", KERNEL=="hwmon*", ATTRS{name}=="nct6779", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp1_input /dev/motherboard_temp'"
 
         # Create GPU core temp aliases with use of vid and pid of the card/interface
         ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x8086", ATTRS{device}=="0xe2f0", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp2_input /dev/gpu_temp'"
