@@ -14,6 +14,20 @@
         type = "github";
       };
     };
+    gc = {
+      automatic = true;
+      dates = lib.mkForce "weekly";
+      options = lib.mkForce "--delete-older-than 7d";
+    };
+    settings = {
+      trusted-users = [ "root" "@wheel" ];
+      auto-optimise-store = true;
+    };
+    extraOptions = ''
+      experimental-features = nix-command flakes ca-derivations
+      binary-caches-parallel-connections = 50
+      preallocate-contents = false
+    '';
   };
 
   environment.systemPackages = with pkgs;
