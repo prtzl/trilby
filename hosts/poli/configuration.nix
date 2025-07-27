@@ -25,8 +25,11 @@
     };
   };
 
-  # nct6775: asrock board sensors
-  boot.kernelModules = [ "nct6775" ];
+  boot = {
+    # nct6775: asrock board sensors
+    kernelModules = [ "nct6775" ];
+    binfmt.emulatedSystems = [ "aarch64-linux" "x86_64-windows" ];
+  };
 
   # This should be done with home module, but I cant import this
   programs.nvimnix.enable = true;
