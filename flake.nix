@@ -6,9 +6,9 @@
   };
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-unstable = { url = "github:nixos/nixpkgs/nixos-unstable"; };
-    nixos-hardware = { url = "github:nixos/nixos-hardware"; };
-    home-manager = { url = "github:nix-community/home-manager"; };
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+    home-manager.url = "github:nix-community/home-manager";
     trilby = {
       url = "github:ners/trilby";
       inputs = {
@@ -17,7 +17,8 @@
         home-manager.follows = "home-manager";
       };
     };
-    nvimnix = { url = "github:prtzl/nvimnix"; };
+    nvimnix.url = "github:prtzl/nvimnix";
+    jlink-pack.url = "github:prtzl/jlink-nix";
   };
   outputs = inputs:
     with builtins;

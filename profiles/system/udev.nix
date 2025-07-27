@@ -1,6 +1,11 @@
-{ pkgs, ... }:
+{ local, trilby, pkgs, ... }:
 
-{
+let
+  mkFree = drv:
+    drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
+  jlink = mkFree
+    local.jlink-pack.defaultPackage."${trilby.hostSystem.cpu.name}-${trilby.hostSystem.kernel.name}";
+in {
   environment.systemPackages = with pkgs; [ stlink tio lm_sensors ];
 
   services.udev = {
@@ -12,7 +17,7 @@
       SUBSYSTEMS=="usb", KERNEL=="ttyUSB[0-9]*", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", SYMLINK+="sensors/ftdi_%s{serial}", GROUP="dialout"
 
       # Somehow added jlink file to udev does not get picked up :/
+      ${builtins.readFile "${jlink}/lib/udev/rules.d/99-jlink.rules"}
     '';
-    # ${builtins.readFile "${pkgs.jlink}/lib/udev/rules.d/99-jlink.rules"}
   };
 }
