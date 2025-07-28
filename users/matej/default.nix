@@ -5,7 +5,7 @@ lib.trilbyUser trilby {
   name = "matej";
   initialHashedPassword =
     "$y$j9T$CF142XO22THqvvp88lMR5/$.EveMJEz6yR6Za/3rvgFNFJ1f15a2xBwEVnUqca.5tA";
-  extraGroups = [
+  extraGroups = lib.mkForce [
     "wheel"
     "libvirtd"
     "networkmanager"

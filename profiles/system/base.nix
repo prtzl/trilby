@@ -45,6 +45,7 @@
       gthumb
       hwinfo
       jq
+      monitorets
       parted
       ripgrep
       xh
