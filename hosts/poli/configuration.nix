@@ -16,15 +16,6 @@
   time.timeZone = lib.mkForce "Europe/Zurich";
   systemd.network.wait-online.extraArgs = [ "--interface=enp13s0" ];
 
-  nix = {
-    settings = {
-      # max-jobs = maximum packages built at once
-      max-jobs = 16;
-      # cores = maximum threads used by a job/package
-      cores = 2;
-    };
-  };
-
   boot = {
     # nct6775: asrock board sensors
     kernelModules = [ "nct6775" ];
