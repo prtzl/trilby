@@ -108,6 +108,10 @@ in {
       viewimage() {
         gthumb "''${@:-.}" >/dev/null 2>&1 & disown
       }
+
+      usage() {
+        du -h "''${1:-.}" --max-depth=1 2> /dev/null | sort -hr
+      }
     '';
   };
 
