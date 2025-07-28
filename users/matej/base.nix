@@ -15,6 +15,7 @@
       # Content creation
       audacity
       gimp
+      obs-studio
 
       # Utility
       enpass
@@ -25,7 +26,8 @@
       xfce.thunar
       xfce.thunar-archive-plugin
       xfce.tumbler
-      mpv
+      mpv # goes to black when entering and exiting fullscreen for a few seconds
+      vlc
 
       # Communication
       signal-desktop
