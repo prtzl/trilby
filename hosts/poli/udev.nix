@@ -1,3 +1,27 @@
+{ pkgs, ... }:
+
+let
+  cpuTempUpdateService = "cpuTempUpdateService";
+  cputempUpdateScript = pkgs.writeShellScript "cputempupdate" ''
+    HWMON_PATH=$(find /sys/class/hwmon/**/ -name 'temp*_label' -exec grep -l 'Tccd1' {} \; | head -n1 | sed 's/temp[0-9]_label//')
+
+    if [ -z "$HWMON_PATH" ]; then
+      exit 1
+    fi
+
+    while true; do
+        TCTL=$(cat "$HWMON_PATH/temp1_input")
+        CCD1=$(cat "$HWMON_PATH/temp3_input")
+        CCD2=$(cat "$HWMON_PATH/temp4_input")
+        AVG=$(( (CCD1 + CCD2) / 2 ))
+
+        echo "$TCTL" > /dev/cpu_temp_tctl
+        echo "$AVG" > /dev/cpu_temp
+
+        sleep 1
+    done
+  '';
+in
 {
   services = {
     udev = {
@@ -10,7 +34,8 @@
         # 4.b: Run: udevadm info --attribute-walk --path=/sys/class/hwmon/hwmon<number> to get unique info mentioned above
         # 5: Copy pase bottom code and either use vendor/product id, name, or whatever else. For various temperatures be sure to rename the link under which it will be available!
         # Ryzen 9 9950x on Asrock x870 Pro rs
-        ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x1022", ATTRS{device}=="0x14e3", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp1_input /dev/cpu_temp'"
+        # ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x1022", ATTRS{device}=="0x14e3", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp1_input /dev/cpu_temp'"
+        ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x1022", ATTRS{device}=="0x14e3", TAG+="systemd", ENV{SYSTEMD_WANTS}="${cpuTempUpdateService}.service"
 
         # External temperature sensor AUXTIN5 on nct6779 platform (mobo sensors)
         ACTION=="add", SUBSYSTEM=="hwmon", KERNEL=="hwmon*", ATTRS{name}=="nct6799", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp9_input /dev/water_temp'"
@@ -21,6 +46,16 @@
         # Create GPU core temp aliases with use of vid and pid of the card/interface
         ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x8086", ATTRS{device}=="0xe2f0", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp2_input /dev/gpu_temp'"
       '';
+    };
+  };
+
+  systemd.services.${cpuTempUpdateService} = {
+    description = "Update CPU temperature aliases";
+    wantedBy = [ "multi-user.target" ]; # or don't enable, since it's triggered by udev
+    script = builtins.readFile cputempUpdateScript;
+    serviceConfig = {
+      Type = "simple";
+      Restart = "always";
     };
   };
 }
