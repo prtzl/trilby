@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 let
+  # Note: I could just read either temp3_input or temp4_input (ccd 1/2) and be happy. But no.
+  # All this extra BS is to get average from both ... amazing this brain of mine.
   cpuTempUpdateService = "cpuTempUpdateService";
   cputempUpdateScript = pkgs.writeShellScript "cputempupdate" ''
     HWMON_PATH=$(find /sys/class/hwmon/**/ -name 'temp*_label' -exec grep -l 'Tccd1' {} \; | head -n1 | sed 's/temp[0-9]_label//')
