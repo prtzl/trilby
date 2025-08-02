@@ -2,6 +2,10 @@
   fileSystems."/storage" = {
     device = "/dev/disk/by-label/storage";
     fsType = "xfs";
-    options = [ "defaults" "user" "rw" ];
+    options = [
+      "defaults"
+      "user"
+      "rw"
+    ];
   };
 }

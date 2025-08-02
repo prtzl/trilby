@@ -1,12 +1,28 @@
-{ local, trilby, pkgs, ... }:
+{
+  local,
+  trilby,
+  pkgs,
+  ...
+}:
 
 let
-  mkFree = drv:
-    drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
-  jlink = mkFree
-    local.jlink-pack.defaultPackage."${trilby.hostSystem.cpu.name}-${trilby.hostSystem.kernel.name}";
-in {
-  environment.systemPackages = with pkgs; [ stlink tio lm_sensors ];
+  mkFree =
+    drv:
+    drv.overrideAttrs (attrs: {
+      meta = attrs.meta // {
+        license = "";
+      };
+    });
+  jlink =
+    mkFree
+      local.jlink-pack.defaultPackage."${trilby.hostSystem.cpu.name}-${trilby.hostSystem.kernel.name}";
+in
+{
+  environment.systemPackages = with pkgs; [
+    stlink
+    tio
+    lm_sensors
+  ];
 
   services.udev = {
     extraRules = ''

@@ -1,4 +1,9 @@
-{ local, lib, trilby, ... }:
+{
+  local,
+  lib,
+  trilby,
+  ...
+}:
 
 {
   imports = [
@@ -8,7 +13,8 @@
     local.nixos-hardware.nixosModules.common-pc-ssd
     local.nvimnix.nixosModules.nvimnix
     ../../users/matej
-  ] ++ (with (lib.findModules ../../profiles/system); [ base ]);
+  ]
+  ++ (with (lib.findModules ../../profiles/system); [ base ]);
 
   networking.hostName = "poli";
   services.xserver.xkb.layout = "us";
@@ -18,8 +24,13 @@
 
   boot = {
     # nct6775: asrock board sensors
-    kernelModules = [ "nct6775" ];
-    binfmt.emulatedSystems = [ "aarch64-linux" "x86_64-windows" ];
+    kernelModules = [
+      "nct6775"
+    ];
+    binfmt.emulatedSystems = [
+      "aarch64-linux"
+      "x86_64-windows"
+    ];
   };
 
   # This should be done with home module, but I cant import this
@@ -30,11 +41,8 @@
 
   programs.steam = lib.optionals (trilby.edition == "workstation") {
     enable = true;
-    remotePlay.openFirewall =
-      true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall =
-      true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall =
-      true; # Open ports in the firewall for Steam Local Network Game Transfers
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 }

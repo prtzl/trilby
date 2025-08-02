@@ -1,7 +1,18 @@
-{ trilby, inputs, local, lib, pkgs, ... }:
+{
+  trilby,
+  inputs,
+  local,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports = with (lib.findModules ./.); [ udev virt fonts ];
+  imports = with (lib.findModules ./.); [
+    udev
+    virt
+    fonts
+  ];
 
   nix = {
     monitored.notify = false;
@@ -20,7 +31,10 @@
       options = lib.mkForce "--delete-older-than 7d";
     };
     settings = {
-      trusted-users = [ "root" "@wheel" ];
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
       auto-optimise-store = true;
     };
     extraOptions = ''
@@ -30,10 +44,12 @@
     '';
   };
 
-  environment.systemPackages = with pkgs;
+  environment.systemPackages =
+    with pkgs;
     [
 
-    ] ++ lib.optionals (trilby.edition == "workstation") [
+    ]
+    ++ lib.optionals (trilby.edition == "workstation") [
       bat
       btop
       eza

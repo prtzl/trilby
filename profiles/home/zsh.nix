@@ -1,9 +1,9 @@
 { pkgs, lib, ... }:
 
 let
-  wslgit =
-    pkgs.writeShellScriptBin "wslgit" (builtins.readFile ./dotfiles/wslgit.sh);
-in {
+  wslgit = pkgs.writeShellScriptBin "wslgit" (builtins.readFile ./dotfiles/wslgit.sh);
+in
+{
   imports = [ ./starship.nix ];
 
   home.packages = with pkgs; [
@@ -30,7 +30,7 @@ in {
     enableCompletion = true;
 
     shellAliases = lib.mkForce {
-      # Utilities 
+      # Utilities
       ls = "eza --group-directories-first --color=always --icons";
       l = "ls -la";
       ll = "ls -l";
@@ -47,12 +47,9 @@ in {
       gvim = "nvim-qt";
 
       # System
-      reboot = ''
-        read -s \?"Reboot? [ENTER]: " && if [ -z "$REPLY" ];then env reboot;else echo "Canceled";fi'';
-      poweroff = ''
-        read -s \?"Poweroff? [ENTER]: " && if [ -z "$REPLY" ];then env poweroff;else echo "Canceled";fi'';
-      udevreload =
-        "sudo udevadm control --reload-rules && sudo udevadm trigger";
+      reboot = ''read -s \?"Reboot? [ENTER]: " && if [ -z "$REPLY" ];then env reboot;else echo "Canceled";fi'';
+      poweroff = ''read -s \?"Poweroff? [ENTER]: " && if [ -z "$REPLY" ];then env poweroff;else echo "Canceled";fi'';
+      udevreload = "sudo udevadm control --reload-rules && sudo udevadm trigger";
 
       git = "wslgit";
     };

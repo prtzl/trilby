@@ -1,8 +1,7 @@
 {
   nixConfig = {
     extra-substituters = [ "https://cache.ners.ch/trilby" ];
-    extra-trusted-public-keys =
-      [ "trilby:AKUGezHi4YbPHCaCf2+XnwWibugjHOwGjH78WqRUnzU=" ];
+    extra-trusted-public-keys = [ "trilby:AKUGezHi4YbPHCaCf2+XnwWibugjHOwGjH78WqRUnzU=" ];
   };
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
@@ -20,16 +19,19 @@
     nvimnix.url = "github:prtzl/nvimnix";
     jlink-pack.url = "github:prtzl/jlink-nix";
   };
-  outputs = inputs:
+  outputs =
+    inputs:
     with builtins;
     let
       inherit (inputs.trilby) lib;
-      allConfigurations = with lib;
+      allConfigurations =
+        with lib;
         pipe ./hosts [
           findModules
           (mapAttrs (hostname: host: import host { inherit inputs lib; }))
         ];
-    in {
+    in
+    {
       inherit (inputs.trilby) legacyPackages;
       nixosConfigurations = allConfigurations;
       darwinConfigurations = allConfigurations;

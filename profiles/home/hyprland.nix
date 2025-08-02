@@ -9,10 +9,15 @@ let
   # Currently pull hyprland resources from unstable - latest
   hypershot_shader_toggle = pkgs.writeShellApplication {
     name = "hypershot_shader_toggle";
-    runtimeInputs = with pkgs; [ hyprcursor hyprshade hyprshot ];
+    runtimeInputs = with pkgs; [
+      hyprcursor
+      hyprshade
+      hyprshot
+    ];
     text = builtins.readFile ./dotfiles/hyprshot/hyprshot_shader_toggle.sh;
   };
-in {
+in
+{
   home.packages = with pkgs; [
     # Hyprland configuration
     hyprcursor # I guess this has to come separately

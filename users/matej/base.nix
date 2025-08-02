@@ -1,10 +1,20 @@
-{ trilby, lib, pkgs, ... }:
+{
+  trilby,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports = with (lib.findModules ../../profiles/home); [ base base-machine ];
+  imports = with (lib.findModules ../../profiles/home); [
+    base
+    base-machine
+  ];
 
-  home.packages = with pkgs.unstable;
-    [ ] ++ lib.optionals (trilby.edition == "workstation") [
+  home.packages =
+    with pkgs.unstable;
+    [ ]
+    ++ lib.optionals (trilby.edition == "workstation") [
       # browser
       ungoogled-chromium
 
@@ -36,6 +46,10 @@
   programs.git = {
     userName = "prtzl";
     userEmail = "matej.blagsic@protonmail.com";
-    extraConfig = { core = { init.defaultBranch = "master"; }; };
+    extraConfig = {
+      core = {
+        init.defaultBranch = "master";
+      };
+    };
   };
 }
