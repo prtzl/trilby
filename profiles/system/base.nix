@@ -44,6 +44,8 @@
     '';
   };
 
+  programs.firefox.package = lib.mkForce pkgs.unstable.firefox;
+
   environment.systemPackages =
     with pkgs;
     [
