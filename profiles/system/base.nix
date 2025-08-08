@@ -13,9 +13,11 @@
       fonts
       pipewire
       udev
-      virt
     ]
-    ++ lib.optionals (trilby.edition == "workstation") [ hyprland ];
+    ++ lib.optionals (trilby.edition == "workstation") [
+      hyprland
+      virt
+    ];
 
   nix = {
     monitored.notify = false;
@@ -47,29 +49,31 @@
     '';
   };
 
-  programs.firefox.package = lib.mkForce pkgs.firefox;
+  programs.firefox = {
+    enable = (trilby.edition == "workstation");
+    package = lib.mkForce pkgs.firefox;
+  };
 
   environment.systemPackages =
     with pkgs;
     [
-
-    ]
-    ++ lib.optionals (trilby.edition == "workstation") [
       bat # replacement for cat
       btop # system info graphs, usage, etc. Modern top
       eza # replacement for exa, replacement for ls
       fastfetch # replacement for neofetch :'(
       fd # modern find
       ffmpeg-full # yes
-      fx
-      gthumb
+      fx # json  viewer
       hwinfo # self explanatory
-      jq # json
-      monitorets # graphs for temperature sensors
+      jq # json processor
       parted # partitions
       ripgrep # modern grep
-      xh
       smartmontools # disk checks
+      xh
+    ]
+    ++ lib.optionals (trilby.edition == "workstation") [
+      gthumb # image viewer of choice
+      monitorets # GUI for temperature sensors
     ];
 
   xdg.mime.inverted.defaultApplications."gthumb.desktop" = lib.mkForce [

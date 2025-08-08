@@ -1,14 +1,26 @@
 {
   local,
   lib,
+  pkgs,
   trilby,
   ...
 }:
 
+let
+  machine = "poli";
+in
 {
   imports =
     [
-      ../../users/matej
+      (import ../../users/matej {
+        inherit
+          lib
+          local
+          machine
+          pkgs
+          trilby
+          ;
+      })
       local.nixos-hardware.nixosModules.common-cpu-amd
       local.nixos-hardware.nixosModules.common-gpu-intel
       local.nixos-hardware.nixosModules.common-pc

@@ -1,14 +1,14 @@
 {
   lib,
   pkgs,
+  machine,
   trilby,
   ...
 }:
 
 {
   imports = with (lib.findModules ../../profiles/home); [
-    base
-    base-machine
+    (import base { inherit lib machine trilby; })
   ];
 
   home.packages =
