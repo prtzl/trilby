@@ -6,6 +6,7 @@
       "defaults"
       "user"
       "rw"
+      "exec"
     ];
   };
 }

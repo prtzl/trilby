@@ -52,21 +52,21 @@
 
     ]
     ++ lib.optionals (trilby.edition == "workstation") [
-      bat
-      btop
-      eza
-      fastfetch
-      fd
-      fd
-      ffmpeg-full
+      bat # replacement for cat
+      btop # system info graphs, usage, etc. Modern top
+      eza # replacement for exa, replacement for ls
+      fastfetch # replacement for neofetch :'(
+      fd # modern find
+      ffmpeg-full # yes
       fx
       gthumb
-      hwinfo
-      jq
-      monitorets
-      parted
-      ripgrep
+      hwinfo # self explanatory
+      jq # json
+      monitorets # graphs for temperature sensors
+      parted # partitions
+      ripgrep # modern grep
       xh
+      smartmontools # disk checks
     ];
 
   xdg.mime.inverted.defaultApplications."gthumb.desktop" = lib.mkForce [
