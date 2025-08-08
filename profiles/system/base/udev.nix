@@ -19,9 +19,15 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
+    # Jlink and stlink - are here to add udev rules. No way around this.
+    # However this also adds their executables, which could be on a project-base.
+    # ... But we still need rules on system config, so we can cry about it.
+    # Have project-specific jlink but make sure system installed is up-to-date
+    # so that your new shiny jlink is supported. Even better, just use this package as well, hehe.
+    jlink
+    lm_sensors
     stlink
     tio
-    lm_sensors
   ];
 
   services.udev = {
