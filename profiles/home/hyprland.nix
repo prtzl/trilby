@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 
 # Hyprland should be installed system-wide so that it's in the boot entries
 # home configuration adds all programs and utilities + configuration

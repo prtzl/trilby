@@ -1,4 +1,9 @@
-{ trilby, lib, ... }:
+{
+  lib,
+  trilby,
+  ...
+}:
+
 lib.trilbyUser trilby {
   imports = lib.findModulesList ./.;
   uid = 1000;

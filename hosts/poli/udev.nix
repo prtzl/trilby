@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 
 let
   # Note: I could just read either temp3_input or temp4_input (ccd 1/2) and be happy. But no.

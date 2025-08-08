@@ -1,7 +1,7 @@
 {
-  local,
-  trilby,
+  inputs,
   pkgs,
+  trilby,
   ...
 }:
 
@@ -15,7 +15,7 @@ let
     });
   jlink =
     mkFree
-      local.jlink-pack.defaultPackage."${trilby.hostSystem.cpu.name}-${trilby.hostSystem.kernel.name}";
+      inputs.jlink-pack.defaultPackage."${trilby.hostSystem.cpu.name}-${trilby.hostSystem.kernel.name}";
 in
 {
   environment.systemPackages = with pkgs; [

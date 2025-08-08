@@ -1,7 +1,7 @@
 {
-  trilby,
   lib,
   pkgs,
+  trilby,
   ...
 }:
 

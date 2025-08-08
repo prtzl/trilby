@@ -1,6 +1,9 @@
 # Stolen shit from: https://github.com/p3t33/nixos_flake/blob/master/modules/home-manager/tmux.nix
 
-{ pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 
 let
   resurrectDirPath = "~/.config/tmux/resurrect";
@@ -9,24 +12,25 @@ in
   programs.tmux = {
     enable = true;
     package = pkgs.tmux;
-    extraConfig = ''
-      # This command is executed to address an edge case where after a fresh install of the OS no resurrect
-      # directory exist which means that the continuum plugin will not work. And so without user
-      # manually saving the first session(prfix + Ctrl+s) no resurrect-continuum will occur.
-      #
-      # And in case user does not remember to save his work for the first time and tmux daemon gets
-      # restarted next time user will try to attach, there will be no state to attach to and user will
-      # be scratching his head as to why.
-      #
-      # Saving right after fresh install on first boot of the tmux daemon with no sessions will create an
-      # empty "last" session file which might cause all kind of issues if tmux gets restarted before
-      # the user had the chance to work in it and let continuum plugin to take over and create
-      # at least one valid "snapshot" from which tmux will be able to resurrect. This is why an initial
-      # session named init-resurrect is created for resurrect plugin to create a valid "last" file for
-      # continuum plugin to work off of.
-      run-shell "if [ ! -d ${resurrectDirPath} ]; then tmux new-session -d -s init-resurrect; ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/save.sh; fi"
-    ''
-    + (builtins.readFile ./dotfiles/tmux/tmux.conf);
+    extraConfig =
+      ''
+        # This command is executed to address an edge case where after a fresh install of the OS no resurrect
+        # directory exist which means that the continuum plugin will not work. And so without user
+        # manually saving the first session(prfix + Ctrl+s) no resurrect-continuum will occur.
+        #
+        # And in case user does not remember to save his work for the first time and tmux daemon gets
+        # restarted next time user will try to attach, there will be no state to attach to and user will
+        # be scratching his head as to why.
+        #
+        # Saving right after fresh install on first boot of the tmux daemon with no sessions will create an
+        # empty "last" session file which might cause all kind of issues if tmux gets restarted before
+        # the user had the chance to work in it and let continuum plugin to take over and create
+        # at least one valid "snapshot" from which tmux will be able to resurrect. This is why an initial
+        # session named init-resurrect is created for resurrect plugin to create a valid "last" file for
+        # continuum plugin to work off of.
+        run-shell "if [ ! -d ${resurrectDirPath} ]; then tmux new-session -d -s init-resurrect; ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/save.sh; fi"
+      ''
+      + (builtins.readFile ./dotfiles/tmux/tmux.conf);
     plugins = with pkgs.tmuxPlugins; [
       {
         plugin = resurrect;

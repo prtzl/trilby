@@ -1,5 +1,9 @@
 configName:
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   # Load base configs, we'll add device specific configs to these

@@ -1,4 +1,7 @@
-{ lib, ... }:
+{
+  lib,
+  ...
+}:
 
 {
   imports = with (lib.findModules ./.); [

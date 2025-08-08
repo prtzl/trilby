@@ -1,9 +1,8 @@
 {
-  trilby,
   inputs,
-  local,
   lib,
   pkgs,
+  trilby,
   ...
 }:
 
@@ -17,7 +16,7 @@
   nix = {
     monitored.notify = false;
     registry = {
-      stable.flake = local.nixpkgs;
+      stable.flake = inputs.nixpkgs;
       unstable.flake = inputs.nixpkgs-unstable;
       master.to = {
         owner = "nixos";

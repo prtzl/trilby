@@ -1,4 +1,8 @@
-{ trilby, lib, ... }:
+{
+  lib,
+  trilby,
+  ...
+}:
 
 {
   imports = lib.optionals (trilby.edition == "workstation") (

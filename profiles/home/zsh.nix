@@ -1,4 +1,8 @@
-{ pkgs, lib, ... }:
+{
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   wslgit = pkgs.writeShellScriptBin "wslgit" (builtins.readFile ./dotfiles/wslgit.sh);
