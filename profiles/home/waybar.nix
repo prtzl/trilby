@@ -238,7 +238,7 @@ in
 {
   programs.waybar = {
     enable = true;
-    package = pkgs.unstable.waybar;
+    package = pkgs.waybar;
     systemd.enable = true;
     systemd.target = "hyprland-session.target";
     settings = [ config ];
