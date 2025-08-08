@@ -15,8 +15,9 @@ lib.trilbySystem {
   specialArgs = {
     local = inputs; # we don't know how to pass this flake inputs as just inputs. Currently it's trilby's
     # Reused machine information. Most of this is for waybar he he
-    machine = {
+    machine = rec {
       name = "poli";
+      hostname = name;
       interfaces = [ "enp13s0" ];
       temp_probes = [
         {

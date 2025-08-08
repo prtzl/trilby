@@ -1,6 +1,7 @@
 {
   inputs,
   lib,
+  machine,
   pkgs,
   trilby,
   ...
@@ -17,6 +18,7 @@
     ++ lib.optionals (trilby.edition == "workstation") [
       hyprland
       virt
+      wine
     ];
 
   nix = {
@@ -48,6 +50,16 @@
       preallocate-contents = false
     '';
   };
+
+  networking.hostName = machine.hostname;
+  services.xserver.xkb.layout = "us";
+  i18n.defaultLocale = "en_GB.UTF-8";
+  # ok, so how do I do this only for steam ... ?
+  nixpkgs.config.allowUnfree = true;
+
+  # Disable ners's neovim and use mine
+  programs.nvimnix.enable = true;
+  programs.neovim.enable = lib.mkForce false;
 
   programs.firefox = {
     enable = (trilby.edition == "workstation");
