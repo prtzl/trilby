@@ -6,14 +6,19 @@
 }:
 
 {
-  imports = [
-    ../../users/matej
-    local.nixos-hardware.nixosModules.common-cpu-amd
-    local.nixos-hardware.nixosModules.common-gpu-intel
-    local.nixos-hardware.nixosModules.common-pc
-    local.nixos-hardware.nixosModules.common-pc-ssd
-    local.nvimnix.nixosModules.nvimnix
-  ] ++ (with (lib.findModules ../../profiles/system); [ base ]);
+  imports =
+    [
+      ../../users/matej
+      local.nixos-hardware.nixosModules.common-cpu-amd
+      local.nixos-hardware.nixosModules.common-gpu-intel
+      local.nixos-hardware.nixosModules.common-pc
+      local.nixos-hardware.nixosModules.common-pc-ssd
+      local.nvimnix.nixosModules.nvimnix
+    ]
+    ++ (with (lib.findModules ../../profiles/system); [
+      base
+      wine
+    ]);
 
   networking.hostName = "poli";
   services.xserver.xkb.layout = "us";

@@ -1,11 +1,16 @@
 {
   lib,
   pkgs,
+  trilby,
   ...
 }:
 
 {
-  environment.systemPackages = with pkgs; [ qpwgraph ];
+  environment.systemPackages =
+    with pkgs;
+    [
+    ]
+    ++ lib.optionals (trilby.edition == "workstation") [ qpwgraph ];
 
   security.rtkit.enable = true;
   services.pipewire = lib.mkForce {

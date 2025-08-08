@@ -7,11 +7,15 @@
 }:
 
 {
-  imports = with (lib.findModules ./.); [
-    udev
-    virt
-    fonts
-  ];
+  imports =
+    with (lib.findModules ./base/.);
+    [
+      fonts
+      pipewire
+      udev
+      virt
+    ]
+    ++ lib.optionals (trilby.edition == "workstation") [ hyprland ];
 
   nix = {
     monitored.notify = false;
