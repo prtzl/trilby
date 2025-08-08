@@ -1,26 +1,15 @@
 {
   local,
   lib,
-  pkgs,
+  machine,
   trilby,
   ...
 }:
 
-let
-  machine = "poli";
-in
 {
   imports =
     [
-      (import ../../users/matej {
-        inherit
-          lib
-          local
-          machine
-          pkgs
-          trilby
-          ;
-      })
+      ../../users/matej
       local.nixos-hardware.nixosModules.common-cpu-amd
       local.nixos-hardware.nixosModules.common-gpu-intel
       local.nixos-hardware.nixosModules.common-pc
@@ -36,7 +25,9 @@ in
   services.xserver.xkb.layout = "us";
   i18n.defaultLocale = "en_GB.UTF-8";
   time.timeZone = lib.mkForce "Europe/Zurich";
-  systemd.network.wait-online.extraArgs = [ "--interface=enp13s0" ];
+  systemd.network.wait-online.extraArgs = map (
+    interface: "--interface=${interface}"
+  ) machine.interfaces;
 
   boot = {
     # nct6775: asrock board sensors

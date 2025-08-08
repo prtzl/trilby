@@ -1,6 +1,6 @@
-configName:
 {
   lib,
+  machine,
   pkgs,
   ...
 }:
@@ -10,9 +10,12 @@ let
   baseconfig = (builtins.fromJSON (builtins.readFile ./dotfiles/waybar/config));
   basestyle = builtins.readFile ./dotfiles/waybar/style.css;
 
-  batteries = [ "nixtop" ];
+  # BATTERIES
+  selectedBatteries = machine.batteries or [ ];
 
-  makeBatteries = path: index: {
+  batteryConfigNames = lib.lists.imap1 (index: battery: "battery") selectedBatteries;
+
+  makeBattery = path: index: {
     battery = {
       bat = "BAT0";
       interval = 60;
@@ -25,14 +28,11 @@ let
     };
   };
 
-  selectedBatteries = batteries;
-
-  batteryConfigNames = lib.lists.imap1 (index: name: "battery") selectedBatteries;
-
-  makeBatteryConfigs = configs: lib.lists.imap1 (index: name: makeBatteries name index) configs;
+  makeBatteryConfigs =
+    batteries: lib.lists.imap1 (index: battery: makeBattery battery index) batteries;
   batteryConfigs = lib.foldl' (acc: x: acc // x) { } (makeBatteryConfigs selectedBatteries);
 
-  makeBatterieStyle =
+  makeBatteryStyle =
     name: index:
     let
       color = "#028909";
@@ -42,87 +42,46 @@ let
         color: ${color};
       }
     '';
-  batteryStyle = builtins.concatStringsSep "\n" (
-    lib.lists.imap1 (index: name: makeBatterieStyle name index) selectedBatteries
+
+  batteryStyles = builtins.concatStringsSep "\n" (
+    lib.lists.imap1 (index: battery: makeBatteryStyle battery index) selectedBatteries
   );
 
   # Temperatures
-  temps = {
-    poli = [
-      "cpu_temp"
-      "gpu_temp"
-      "water_temp"
-      "motherboard_temp"
-    ];
-    nixbox = [
-      "cpu_temp"
-      "gpu_temp"
-    ];
-    nixtop = [ "cpu_temp" ];
-  };
+  selectedTempProbes = machine.temp_probes or [ ];
 
-  makeTemps =
-    path: index:
-    let
-      icon =
-        if path == "cpu_temp" then
-          ""
-        else if path == "gpu_temp" then
-          "🏭"
-        else if path == "water_temp" then
-          "🌊"
-        else if path == "motherboard_temp" then
-          "🎂"
-        else
-          "🌡️"; # fallback/default
-    in
-    {
+  tempConfigNames = lib.lists.imap1 (
+    index: temp_probe: "temperature#${builtins.toString index}"
+  ) selectedTempProbes;
+
+  makeTemp =
+    temp_probe: index: with temp_probe; {
       "temperature#${builtins.toString index}" = {
         format = "${icon} {temperatureC}°C";
-        hwmon-path = [ "/dev/${path}" ];
+        hwmon-path = [ "${path}" ];
         interval = 2;
         tooltip-format = "${path}: {temperatureC}°C";
       };
     };
 
-  selectedTemps = temps.${configName} or [ ];
+  makeTempConfigs = temp_probes: lib.lists.imap1 (index: probe: makeTemp probe index) temp_probes;
+  tempConfigs = lib.foldl' (acc: x: acc // x) { } (makeTempConfigs selectedTempProbes);
 
-  tempConfigNames = lib.lists.imap1 (
-    index: name: "temperature#${builtins.toString index}"
-  ) selectedTemps;
-
-  makeTempConfigs = configs: lib.lists.imap1 (index: name: makeTemps name index) configs;
-  tempConfigs = lib.foldl' (acc: x: acc // x) { } (makeTempConfigs selectedTemps);
-
+  # TODO: how to add a default
   makeTempStyle =
-    name: index:
-    let
-      color =
-        if name == "cpu_temp" then
-          "#3ffc81"
-        else if name == "gpu_temp" then
-          "#982daf"
-        else if name == "water_temp" then
-          "#3385e6"
-        else if name == "motherboard_temp" then
-          "#982daf"
-        else
-          "#ffffff"; # fallback/default
-    in
-    ''
+    temp_probne: index: with temp_probne; ''
       #temperature.${builtins.toString index} {
         color: ${color};
       }
     '';
-  tempStyle = builtins.concatStringsSep "\n" (
-    lib.lists.imap1 (index: name: makeTempStyle name index) selectedTemps
+  tempStyles = builtins.concatStringsSep "\n" (
+    lib.lists.imap1 (index: temp_probe: makeTempStyle temp_probe index) selectedTempProbes
   );
 
   # DISKS
-  disks = {
-    nixbox = [ "/storage" ];
-    poli = [ "/storage" ];
-  };
+  selectedDisks = machine.disks or [ ];
+
+  diskConfigNames = lib.lists.imap1 (index: path: "disk#${builtins.toString index}") selectedDisks;
 
   makeDisks = path: index: {
     "disk#${builtins.toString index}" = {
@@ -135,17 +94,13 @@ let
     };
   };
 
-  selectedDisks = [ "/" ] ++ disks.${configName} or [ ];
-
-  diskConfigNames = lib.lists.imap1 (index: name: "disk#${builtins.toString index}") selectedDisks;
-
-  makeDiskConfigs = configs: lib.lists.imap1 (index: name: makeDisks name index) configs;
+  makeDiskConfigs = disks: lib.lists.imap1 (index: path: makeDisks path index) disks;
   diskConfigs = lib.foldl' (acc: x: acc // x) { } (makeDiskConfigs selectedDisks);
 
-  diskStyle =
+  diskStyles =
     builtins.concatStringsSep ''
       ,
-    '' (lib.lists.imap1 (index: name: "#disk.${builtins.toString index}") selectedDisks)
+    '' (lib.lists.imap1 (index: path: "#disk.${builtins.toString index}") selectedDisks)
     + ''
       {
         color: #b58900;
@@ -153,20 +108,16 @@ let
     '';
 
   ## INTERFACES
-  interfaces = {
-    poli = [ "enp13s0" ];
-    nixbox = [ "enp9s0" ];
-    nixtop = [
-      "enp0s31f6"
-      "wlp61s0"
-    ];
-    wsl = [ "eth0" ];
-    testbox = [ "enp1s0" ];
-  };
+  selectedInterfaces = machine.interfaces or [ ];
 
-  makeInterface = name: index: {
+  # Create list of network interfaces
+  networkConfigNames = lib.lists.imap1 (
+    index: interface: "network#${builtins.toString index}"
+  ) selectedInterfaces;
+
+  makeInterface = interface: index: {
     "network#${builtins.toString index}" = {
-      interface = "${name}";
+      interface = "${interface}";
       format-wifi = " ";
       format-ethernet = " ";
       format-disconnected = "🚫";
@@ -181,19 +132,11 @@ let
     };
   };
 
-  # selectedInterfaces = interfaces.nixtop; # for testing
-  selectedInterfaces = interfaces.${configName} or [ ];
-
-  # Create list of network interfaces
-  networkConfigNames = lib.lists.imap1 (
-    index: name: "network#${builtins.toString index}"
-  ) selectedInterfaces;
-
   # Create css block for styling network interfaces
-  networkStyle =
+  networkStyles =
     builtins.concatStringsSep ''
       ,
-    '' (lib.lists.imap1 (index: name: "#network.${builtins.toString index}") selectedInterfaces)
+    '' (lib.lists.imap1 (index: interface: "#network.${builtins.toString index}") selectedInterfaces)
     + ''
       {
         color: #800080;
@@ -201,11 +144,11 @@ let
     '';
 
   # Create attrset of network config option blocks
-  makeNetworkConfigs = configs: lib.lists.imap1 (index: name: makeInterface name index) configs;
+  makeNetworkConfigs =
+    interfaces: lib.lists.imap1 (index: interface: makeInterface interface index) interfaces;
   networkConfigs = lib.foldl' (acc: x: acc // x) { } (makeNetworkConfigs selectedInterfaces);
 
   ## Output configs
-
   # modues-right has cpu - memory - pulse. Put the "dynamic modules" between first two and last.
   modules-right =
     let
@@ -232,7 +175,7 @@ let
     // diskConfigs
     // tempConfigs
     // batteryConfigs;
-  style = basestyle + networkStyle + diskStyle + tempStyle + batteryStyle;
+  style = basestyle + networkStyles + diskStyles + tempStyles + batteryStyles;
 
 in
 {
