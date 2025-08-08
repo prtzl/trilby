@@ -12,6 +12,7 @@
     with (lib.findModules ./base/.);
     [
       fonts
+      nvim
       pipewire
       udev
     ]
@@ -54,12 +55,6 @@
   networking.hostName = machine.hostname;
   services.xserver.xkb.layout = "us";
   i18n.defaultLocale = "en_GB.UTF-8";
-  # ok, so how do I do this only for steam ... ?
-  nixpkgs.config.allowUnfree = true;
-
-  # Disable ners's neovim and use mine
-  programs.nvimnix.enable = true;
-  programs.neovim.enable = lib.mkForce false;
 
   programs.firefox = {
     enable = (trilby.edition == "workstation");

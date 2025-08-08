@@ -2,7 +2,6 @@
   local,
   lib,
   machine,
-  trilby,
   ...
 }:
 
@@ -14,7 +13,6 @@
       local.nixos-hardware.nixosModules.common-gpu-intel
       local.nixos-hardware.nixosModules.common-pc
       local.nixos-hardware.nixosModules.common-pc-ssd
-      local.nvimnix.nixosModules.nvimnix
     ]
     ++ (with (lib.findModules ../../profiles/system); [
       base
