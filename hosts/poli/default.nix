@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   ...
 }:
@@ -10,4 +11,5 @@ lib.trilbySystem {
     hostPlatform = "x86_64-linux";
   };
   modules = lib.findModulesList ./.;
+  specialArgs.local = inputs;
 }

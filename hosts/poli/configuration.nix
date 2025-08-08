@@ -1,5 +1,5 @@
 {
-  inputs,
+  local,
   lib,
   trilby,
   ...
@@ -8,11 +8,11 @@
 {
   imports = [
     ../../users/matej
-    inputs.nixos-hardware.nixosModules.common-cpu-amd
-    inputs.nixos-hardware.nixosModules.common-gpu-intel
-    inputs.nixos-hardware.nixosModules.common-pc
-    inputs.nixos-hardware.nixosModules.common-pc-ssd
-    inputs.nvimnix.nixosModules.nvimnix
+    local.nixos-hardware.nixosModules.common-cpu-amd
+    local.nixos-hardware.nixosModules.common-gpu-intel
+    local.nixos-hardware.nixosModules.common-pc
+    local.nixos-hardware.nixosModules.common-pc-ssd
+    local.nvimnix.nixosModules.nvimnix
   ] ++ (with (lib.findModules ../../profiles/system); [ base ]);
 
   networking.hostName = "poli";
