@@ -74,8 +74,10 @@
       hwinfo # self explanatory
       jq # json processor
       parted # partitions
+      pciutils # info on pci devices
       ripgrep # modern grep
       smartmontools # disk checks
+      usbutils # info on usb devices
       xh
     ]
     ++ lib.optionals (trilby.edition == "workstation") [
