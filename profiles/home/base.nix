@@ -8,6 +8,7 @@
   imports =
     with (lib.findModules ./.);
     [
+      btop
       nvim
       ranger
       tmux

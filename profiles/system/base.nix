@@ -61,6 +61,8 @@
     package = lib.mkForce pkgs.firefox;
   };
 
+  programs.usbtop.enable = true;
+
   environment.systemPackages =
     with pkgs;
     [
