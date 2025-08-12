@@ -11,18 +11,19 @@ lib.trilbyUser trilby {
   name = "matej";
   initialHashedPassword = "$y$j9T$CF142XO22THqvvp88lMR5/$.EveMJEz6yR6Za/3rvgFNFJ1f15a2xBwEVnUqca.5tA";
   extraGroups = lib.mkForce [
-    "wheel"
+    "adbusers"
+    "audio"
+    "dialout"
+    "docker"
+    "kvm"
     "libvirtd"
     "networkmanager"
-    "dialout"
-    "audio"
-    "video"
-    "usb"
-    "podman"
-    "docker"
     "openrazer"
-    "kvm"
-    "adbusers"
+    "plugdev"
+    "podman"
+    "usb"
+    "video"
+    "wheel"
   ];
   extraSpecialArgs = { inherit machine; };
 }
