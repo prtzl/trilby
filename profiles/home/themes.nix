@@ -32,7 +32,7 @@
         package = pkgs.numix-cursor-theme;
       };
       gtk2.extraConfig = ''
-        gtk-tooltip-timeout = ${builtins.toString tooltipTimeout};
+        gtk-tooltip-timeout = ${builtins.toString tooltipTimeout}
       '';
       gtk3.extraConfig = gtkExtraConfig;
       gtk4.extraConfig = gtkExtraConfig;
