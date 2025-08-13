@@ -1,13 +1,9 @@
-{
-  pkgs,
-  ...
-}:
-
 let
+  # MAIN NOTE: requires kernel 6.16 at least. 5.15.9 did not work - no Tccd[1/2]
   # Note: I could just read either temp3_input or temp4_input (ccd 1/2) and be happy. But no.
   # All this extra BS is to get average from both ... amazing this brain of mine.
   cpuTempUpdateService = "cpuTempUpdateService";
-  cputempUpdateScript = pkgs.writeShellScript "cputempupdate" ''
+  cputempUpdateScript = ''
     HWMON_PATH=$(find /sys/class/hwmon/**/ -name 'temp*_label' -exec grep -l 'Tccd1' {} \; | head -n1 | sed 's/temp[0-9]_label//')
 
     if [ -z "$HWMON_PATH" ]; then
@@ -57,7 +53,7 @@ in
   systemd.services.${cpuTempUpdateService} = {
     description = "Update CPU temperature aliases";
     wantedBy = [ "multi-user.target" ]; # or don't enable, since it's triggered by udev
-    script = builtins.readFile cputempUpdateScript;
+    script = cputempUpdateScript;
     serviceConfig = {
       Type = "simple";
       Restart = "always";
