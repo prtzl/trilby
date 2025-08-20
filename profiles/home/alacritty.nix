@@ -28,7 +28,8 @@
       colors = {
         primary = {
           background = "0x000000";
-          foreground = "0xB3B1AD";
+          # foreground = "0xB3B1AD";
+          foreground = "0xffffff";
 
           dim_foreground = "0xdbdbdb";
           bright_foreground = "0xd9d9d9";

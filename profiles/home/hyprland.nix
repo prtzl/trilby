@@ -53,6 +53,14 @@ in
     extraConfig = builtins.readFile ./dotfiles/hyprland/hyprland.conf;
   };
 
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = "${./dotfiles/windowsXP.jpg}";
+      wallpaper = ",${./dotfiles/windowsXP.jpg}";
+    };
+  };
+
   # Save shaders manually
   home.file.".config/hypr/shaders".source = ./dotfiles/hyprland/shaders;
 }
