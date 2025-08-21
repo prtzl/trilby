@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   trilby,
   ...
 }:
@@ -21,5 +22,28 @@
       themes
       tio
       waybar
+    ];
+
+  home.packages =
+    with pkgs;
+    [ ]
+    ++ (trilby.edition == "workstation") [
+      # Web
+      ungoogled-chromium
+      transmission_4-gtk
+
+      # file explorer
+      xfce.thunar
+      xfce.thunar-archive-plugin
+      xfce.tumbler
+
+      # media
+      vlc
+
+      # Utility
+      enpass
+
+      # Communication
+      signal-desktop
     ];
 }

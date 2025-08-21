@@ -179,6 +179,9 @@ let
 
 in
 {
+  home.programs = with pkgs; [
+    pavucontrol
+  ];
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
