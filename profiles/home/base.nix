@@ -7,7 +7,7 @@
 
 {
   imports =
-    with (lib.findModules ./.);
+    with (lib.findModules ./base);
     [
       btop
       nvim
@@ -27,7 +27,7 @@
   home.packages =
     with pkgs;
     [ ]
-    ++ (trilby.edition == "workstation") [
+    ++ lib.optionals (trilby.edition == "workstation") [
       # Web
       ungoogled-chromium
       transmission_4-gtk

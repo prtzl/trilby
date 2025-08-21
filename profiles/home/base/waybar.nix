@@ -179,9 +179,10 @@ let
 
 in
 {
-  home.programs = with pkgs; [
-    pavucontrol
+  home.packages = with pkgs; [
+    pavucontrol # used to adjust volume with applet. Yes, usefull on it's own, but manly used via applet, so we require it here
   ];
+
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
