@@ -83,7 +83,15 @@
       xh
     ]
     ++ lib.optionals (trilby.edition == "workstation") [
-      gthumb # image viewer of choice
+      # file explorer
+      xfce.thunar
+      xfce.thunar-archive-plugin
+      xfce.tumbler
+
+      # media
+      vlc # video player
+      gthumb # image viewer
+
       monitorets # GUI for temperature sensors
     ];
 

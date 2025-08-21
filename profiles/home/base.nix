@@ -32,14 +32,6 @@
       ungoogled-chromium
       transmission_4-gtk
 
-      # file explorer
-      xfce.thunar
-      xfce.thunar-archive-plugin
-      xfce.tumbler
-
-      # media
-      vlc
-
       # Utility
       enpass
 
