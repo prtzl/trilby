@@ -38,6 +38,7 @@ in
   programs.rofi = {
     enable = true;
     package = pkgs.rofi;
+    font = "FiraCode Nerd Font Mono 24";
     theme = "Arc-Dark";
   };
 
@@ -56,8 +57,8 @@ in
   services.hyprpaper = {
     enable = true;
     settings = {
-      preload = "${./dotfiles/windowsXP.jpg}";
-      wallpaper = ",${./dotfiles/windowsXP.jpg}";
+      preload = "${./dotfiles/wallpaper.jpg}";
+      wallpaper = ",${./dotfiles/wallpaper.jpg}";
     };
   };
 
