@@ -16,7 +16,7 @@
     ++ lib.optionals (trilby.edition == "workstation") [
       # Dev
       arduino
-      drawio
+      unstable.drawio # unstable is free
 
       # Content creation
       audacity
