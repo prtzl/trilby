@@ -22,7 +22,7 @@ in
     zsh-completions
   ];
 
-  programs.direnv = lib.mkForce {
+  programs.direnv = {
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
@@ -30,8 +30,10 @@ in
 
   programs.zsh = {
     enable = true;
-    autosuggestion.enable = true;
     enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    historySubstringSearch.enable = true;
 
     shellAliases = {
       # Utilities
