@@ -12,6 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     trilby = {
+      # url = "/home/matej/projects/trilby";
       url = "github:prtzl/trilby-origin";
       inputs = {
         nixpkgs.follows = "nixpkgs";

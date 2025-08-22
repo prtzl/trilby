@@ -33,7 +33,7 @@ in
     autosuggestion.enable = true;
     enableCompletion = true;
 
-    shellAliases = lib.mkForce {
+    shellAliases = {
       # Utilities
       ls = "eza --group-directories-first --color=always --icons";
       l = "ls -la";
@@ -117,7 +117,6 @@ in
   };
 
   home.sessionVariables = {
-    NIXPKGS_ALLOW_UNFREE = 1;
     TERM = "xterm-256color";
   };
 }

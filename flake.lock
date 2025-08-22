@@ -319,11 +319,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1755725130,
-        "narHash": "sha256-puVUaZZ5SEZ1LWYNaldZMfQ4XkFDgIhy3lXCw3uGJjU=",
+        "lastModified": 1755866112,
+        "narHash": "sha256-meVSOT2XSRwlX5/jpT76g3O4PEAUK9haUoJqUwGCzV0=",
         "owner": "prtzl",
         "repo": "nvimnix",
-        "rev": "36f39f05979510b120d748cb2d953d7d034dbd9d",
+        "rev": "b280281d9d9c5d004e27b12a3dfd2e6662b274df",
         "type": "github"
       },
       "original": {
@@ -391,11 +391,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1755290383,
-        "narHash": "sha256-9MqEXBsC7uNhaGqro6kbQXsWIa0iN7ERt5rFCxbstYs=",
+        "lastModified": 1755898891,
+        "narHash": "sha256-J9SzUD9+qParWCSzbgD/5eJmE81bZsMVWCuj3goyN14=",
         "owner": "prtzl",
         "repo": "trilby-origin",
-        "rev": "e6ffd5b94561a00fe3cdc55fd5683a841f9abe63",
+        "rev": "e5d3a6a3ad8a3e20fccad0e7293efeeffa3cc78d",
         "type": "github"
       },
       "original": {
