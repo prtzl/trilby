@@ -27,7 +27,7 @@
       # ayu_dark
       colors = {
         primary = {
-          background = "0x13131C";
+          # background = "0x13131C";
           # foreground = "0xB3B1AD";
           foreground = "0xffffff";
 
