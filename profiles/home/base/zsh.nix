@@ -17,6 +17,7 @@ in
     fzf
     lazygit
     ripgrep
+    tree
     wslgit
     xclip
     zsh-completions
@@ -79,15 +80,27 @@ in
       _comp_options+=(globdots)
 
 
-      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-      source ${pkgs.nix-zsh-completions}/share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh
-
-
       source ${pkgs.fzf}/share/fzf/completion.zsh
       source ${pkgs.fzf}/share/fzf/key-bindings.zsh
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/lib/zsh-ls-colors/ls-colors.zsh
+
+      # Custom ctrl+r command history search
+      export FZF_CTRL_R_OPTS="
+        --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+        --color header:italic
+        --header 'Press CTRL-Y to copy command into clipboard'"
+
+      # Custom ctrl+t file serach with bat preview
+      export FZF_CTRL_T_OPTS="
+        --walker-skip .git,node_modules,target
+        --preview 'bat -n --color=always {}'
+        --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+      # Custom alt+c to cd into directory and show preview of it
+      export FZF_ALT_C_OPTS="
+        --walker-skip .git,node_modules,target
+        --preview 'tree -C {}'"
 
 
       # Add history command complete
