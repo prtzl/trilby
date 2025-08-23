@@ -32,7 +32,7 @@
           foreground = "0xffffff";
 
           dim_foreground = "0xdbdbdb";
-          bright_foreground = "0xd9d9d9";
+          # bright_foreground = "0xd9d9d9";
           #bright_background = "0x3a3a3a";
           #dim_background = "0x202020";
         };
