@@ -24,6 +24,7 @@
         "expand": true,
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "align": "center",
+        "tooltip": true,
         "calendar": {
             "mode"          : "month",
             "mode-mon-col"  : 3,
@@ -49,7 +50,8 @@
     "clock#2": {
         "interval": 1,
         "format": "{:%H:%M:%S}",
-        "expand": false
+        "expand": false,
+        "tooltip": false
     },
     "pulseaudio": {
         "format": "{icon} {volume:3}%",
