@@ -21,14 +21,8 @@
     ],
     "clock#1": {
         "format": "{:%A %d}",
-        "tooltip": false,
-        "expand": false
-    },
-    "clock#2": {
-        "interval": 1,
-        "format": "{:%H:%M:%S}",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "expand": true,
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "align": "center",
         "calendar": {
             "mode"          : "month",
@@ -51,6 +45,11 @@
             "on-scroll-up": "shift_up",
             "on-scroll-down": "shift_down"
         }
+    },
+    "clock#2": {
+        "interval": 1,
+        "format": "{:%H:%M:%S}",
+        "expand": false
     },
     "pulseaudio": {
         "format": "{icon} {volume:3}%",

@@ -7,21 +7,20 @@
           family = "FiraCode Nerd Font Mono";
           style = "Regular";
         };
-        size = 12;
+        size = 14;
       };
       env.TERM = "xterm-256color";
       window = {
         opacity = 1;
         title = "";
         dynamic_title = true;
-
         padding = {
-          x = 5;
-          y = 5;
+          x = 8;
+          y = 8;
         };
       };
       scrolling = {
-        history = 1000;
+        history = 100000;
         multiplier = 2;
       };
       # ayu_dark
@@ -33,8 +32,8 @@
 
           dim_foreground = "0xdbdbdb";
           # bright_foreground = "0xd9d9d9";
-          #bright_background = "0x3a3a3a";
-          #dim_background = "0x202020";
+          # bright_background = "0x3a3a3a";
+          # dim_background = "0x202020";
         };
         normal = {
           black = "0x01060E";
