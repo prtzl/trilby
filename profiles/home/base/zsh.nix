@@ -92,6 +92,11 @@ in
     initContent = ''
       autoload -U colors && colors
 
+      zstyle ':completion:*' menu select
+      zstyle ':completion:*' group-name ""
+      zstyle ':completion:*' matcher-list "" 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+      _comp_options+=(globdots)
+
       # Add history command complete
       source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
       bindkey "^[[A" history-substring-search-up
