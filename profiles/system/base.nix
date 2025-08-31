@@ -13,11 +13,11 @@
     [
       fonts
       nvim
-      pipewire
-      udev
     ]
     ++ lib.optionals (trilby.edition == "workstation") [
       hyprland
+      pipewire
+      udev
       virt
       wine
     ];
