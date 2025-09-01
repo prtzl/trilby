@@ -57,8 +57,8 @@ in
   services.hyprpaper = {
     enable = true;
     settings = {
-      preload = "${./dotfiles/wallpaper.png}";
-      wallpaper = ",${./dotfiles/wallpaper.png}";
+      preload = "${./dotfiles/wallpaper.jpg}";
+      wallpaper = ",${./dotfiles/wallpaper.jpg}";
     };
   };
 
