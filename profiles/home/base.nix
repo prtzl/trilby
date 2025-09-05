@@ -13,7 +13,7 @@
       nvim
       ranger
       tmux
-      zsh
+      shell
     ]
     ++ lib.optionals (trilby.edition == "workstation") [
       alacritty
