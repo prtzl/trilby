@@ -425,11 +425,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1757179603,
-        "narHash": "sha256-yYKTNpTnA4OPvLGA//xwronGwX9q2El7+AuIZtFjEvA=",
+        "lastModified": 1757181484,
+        "narHash": "sha256-wblMrBWRgkF39/A3MnsYJmw//dQGgGT7g+2L9tV7300=",
         "owner": "prtzl",
         "repo": "trilby-origin",
-        "rev": "59f90691b3b17ef300508daf8c2ed759d67345f8",
+        "rev": "a6eeeeb656cc92fbef815ae51344c67a966724a0",
         "type": "github"
       },
       "original": {
