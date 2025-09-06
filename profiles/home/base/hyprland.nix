@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   ...
 }:
@@ -54,6 +55,7 @@ in
     extraConfig = builtins.readFile ./dotfiles/hyprland/hyprland.conf;
   };
 
+  systemd.user.services.hyprpaper.Unit.After = lib.mkForce "graphical-session.target";
   services.hyprpaper = {
     enable = true;
     settings = {

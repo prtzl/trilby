@@ -183,6 +183,7 @@ in
     pavucontrol # used to adjust volume with applet. Yes, usefull on it's own, but manly used via applet, so we require it here
   ];
 
+  systemd.user.services.waybar.Unit.After = lib.mkForce "graphical-session.target";
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
