@@ -425,14 +425,18 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1757179242,
-        "narHash": "sha256-3uEI1q9SZoym4kjct6lKGuOEeOO0mwclGy+euVpD0a0=",
-        "path": "/home/matej/projects/trilby",
-        "type": "path"
+        "lastModified": 1757179603,
+        "narHash": "sha256-yYKTNpTnA4OPvLGA//xwronGwX9q2El7+AuIZtFjEvA=",
+        "owner": "prtzl",
+        "repo": "trilby-origin",
+        "rev": "59f90691b3b17ef300508daf8c2ed759d67345f8",
+        "type": "github"
       },
       "original": {
-        "path": "/home/matej/projects/trilby",
-        "type": "path"
+        "owner": "prtzl",
+        "ref": "defaults",
+        "repo": "trilby-origin",
+        "type": "github"
       }
     }
   },

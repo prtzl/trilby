@@ -12,8 +12,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     trilby = {
-      url = "/home/matej/projects/trilby";
-      # url = "github:prtzl/trilby-origin";
+      # url = "/home/matej/projects/trilby"; # local work copy for testing
+      url = "github:prtzl/trilby-origin/defaults"; # current branch
       inputs = {
         nixpkgs.follows = "nixpkgs";
         nixpkgs-unstable.follows = "nixpkgs-unstable";
