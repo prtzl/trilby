@@ -35,8 +35,8 @@
     };
     gc = {
       automatic = true;
-      dates = lib.mkForce "weekly";
-      options = lib.mkForce "--delete-older-than 7d";
+      dates = "weekly";
+      options = "--delete-older-than 7d";
     };
     settings = {
       trusted-users = [
@@ -58,7 +58,7 @@
 
   programs.firefox = {
     enable = (trilby.edition == "workstation");
-    package = lib.mkForce pkgs.firefox;
+    package = pkgs.firefox;
   };
 
   programs.usbtop.enable = true;
@@ -95,7 +95,7 @@
       monitorets # GUI for temperature sensors
     ];
 
-  xdg.mime.inverted.defaultApplications."gthumb.desktop" = lib.mkForce [
+  xdg.mime.inverted.defaultApplications."gthumb.desktop" = [
     "image/bmp"
     "image/gif"
     "image/jpeg"

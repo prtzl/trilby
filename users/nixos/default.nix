@@ -9,7 +9,7 @@ lib.trilbyUser trilby {
   imports = lib.findModulesList ./.;
   uid = 1000;
   name = "nixos";
-  extraGroups = lib.mkForce [
+  extraGroups = [
     "wheel"
     "networkmanager"
     "dialout"

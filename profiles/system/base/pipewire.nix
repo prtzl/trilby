@@ -13,7 +13,7 @@
     ++ lib.optionals (trilby.edition == "workstation") [ qpwgraph ];
 
   security.rtkit.enable = true;
-  services.pipewire = lib.mkForce {
+  services.pipewire = {
     enable = true;
     pulse.enable = true;
     jack.enable = true;

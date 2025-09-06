@@ -425,8 +425,8 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1757174569,
-        "narHash": "sha256-iDZTlo+LGePwlBgyr+LLCcb1DXXekxQilbUaHSRJYQE=",
+        "lastModified": 1757178980,
+        "narHash": "sha256-zm3WJ++kqWHW9Dv9cSAFYDtaKOA5MNY1uSq9q6zh92g=",
         "path": "/home/matej/projects/trilby",
         "type": "path"
       },

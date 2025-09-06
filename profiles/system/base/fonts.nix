@@ -1,11 +1,10 @@
 {
-  lib,
   pkgs,
   ...
 }:
 
 {
-  fonts = lib.mkForce {
+  fonts = {
     fontconfig = {
       enable = true;
       defaultFonts = {
