@@ -11,10 +11,6 @@
     xwayland.enable = true;
   };
 
-  # Disable Trilby defaults
-  services.xserver.displayManager.gdm.enable = lib.mkForce false;
-  services.xserver.displayManager.gdm.wayland = lib.mkForce false;
-
   # Light weight and nice
   services.displayManager.ly = {
     enable = true;
