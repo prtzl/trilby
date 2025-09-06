@@ -18,7 +18,6 @@
     steam
   ]);
 
-  time.timeZone = "Europe/Zurich";
   systemd.network.wait-online.extraArgs = map (
     interface: "--interface=${interface}"
   ) machine.interfaces;
