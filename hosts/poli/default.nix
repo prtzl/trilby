@@ -12,7 +12,7 @@ lib.trilbySystem {
   };
   modules = (lib.findModulesList ./.) ++ [ ];
   specialArgs = {
-    defaultDesktop = false;
+    defaultDesktop = false; # my jank solution, where trilby should NOT include "gnome/sway" stuff if this is set
     local = inputs; # we don't know how to pass this flake inputs as just inputs. Currently it's trilby's
     # Reused machine information. Most of this is for waybar he he
     machine = rec {
