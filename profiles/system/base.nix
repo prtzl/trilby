@@ -90,6 +90,9 @@
       xfce.thunar-archive-plugin
       xfce.tumbler
 
+      # calculator
+      qalculate-gtk
+
       # media
       vlc # video player
       gthumb # image viewer
