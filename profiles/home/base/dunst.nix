@@ -24,12 +24,11 @@ in
     settings = {
       global = {
         # General appearance
-        font = "FiraCode Nerd Font Mono 18";
+        font = "FiraCode Nerd Font Mono 16";
         alignment = "center";
         vertical_alignment = "center";
-        width = "(0, 450)";
-        height = "(0, 100)";
-        offset = "(0, 40)";
+        width = "(0, 1000)";
+        height = "(0, 360)";
         separator_height = 2;
         progress_bar_height = 5;
         show_indicators = "no";
@@ -52,7 +51,7 @@ in
         enable_recursive_icon_lookup = true;
 
         # Format;
-        format = "<b>%s (%a)</b>\\n%b";
+        format = ''<u>%a</u>\n<b>%s</b>\n%b'';
 
         # Behavior;
         notification_limit = 5;
