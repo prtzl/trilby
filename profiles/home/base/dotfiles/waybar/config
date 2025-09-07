@@ -13,7 +13,7 @@
     ],
     "modules-right": [
         "tray",
-        "hyprland/language",
+        "custom/keyboard",
         "cpu",
         "memory",
         "pulseaudio"
@@ -80,10 +80,9 @@
     "hyprland/workspaces": {
         "all-outputs": true
     },
-    "hyprland/language": {
-        "format": "⌨ {}",
-        "format-en": "us",
-        "format-si": "si",
-        "format-sl": "si"
+    "custom/keyboard": {
+        "exec": "hyprctl -j devices | jq -r '.keyboards[] | select(.main == true) | .active_keymap' | sed -E 's/.*\\((.*)\\)/\\1/; s/English US/US/; s/Slovenian/SI/'",
+        "interval": 1,
+        "format": "⌨ {}"
     }
 }

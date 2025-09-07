@@ -17,7 +17,7 @@ window#waybar {
 #clock,
 #cpu,
 #disk,
-#language,
+#custom-keyboard,
 #memory,
 #network,
 #pulseaudio,
@@ -88,7 +88,8 @@ window#waybar {
     color: #6c71c4;
 }
 
-#language {
+
+#custom-keyboard {
     color: #a6799d;
 }
 
