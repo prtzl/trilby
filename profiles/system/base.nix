@@ -52,6 +52,8 @@
     '';
   };
 
+  home-manager.backupFileExtension = "backup";
+
   networking.hostName = machine.hostname;
   services.xserver.xkb.layout = "us";
   i18n.defaultLocale = "en_GB.UTF-8";
