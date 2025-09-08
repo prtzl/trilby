@@ -7,7 +7,7 @@
           family = "FiraCode Nerd Font Mono";
           style = "Regular";
         };
-        size = 14;
+        size = 12;
       };
       env.TERM = "xterm-256color";
       window = {
