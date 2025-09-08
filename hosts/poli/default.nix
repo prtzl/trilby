@@ -22,22 +22,22 @@ lib.trilbySystem {
       temp_probes = [
         {
           path = "/dev/cpu_temp";
-          icon = "";
+          icon = "";
           color = "#3ffc81";
         }
         {
           path = "/dev/gpu_temp";
-          icon = "🏭";
+          icon = "󰍹";
           color = "#982daf";
         }
         {
           path = "/dev/water_temp";
-          icon = "🌊";
+          icon = "";
           color = "#3385e6";
         }
         {
           path = "/dev/motherboard_temp";
-          icon = "🎂";
+          icon = "";
           color = "#982daf";
         }
       ];

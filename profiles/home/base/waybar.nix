@@ -190,6 +190,6 @@ in
     systemd.enable = true;
     systemd.target = "hyprland-session.target";
     settings = [ config ];
-    style = style;
+    style = basestyle; # = style, going emo
   };
 }

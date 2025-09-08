@@ -72,25 +72,25 @@ window#waybar {
     transition: none;
 }
 
-#pulseaudio {
-    color: #268bd2;
-}
+/* #pulseaudio { */
+/*     color: #268bd2; */
+/* } */
 #pulseaudio.muted {
     color: #be2528;
     font-weight: bold;
 }
 
-#memory {
-    color: #2aa198;
-}
-
-#cpu {
-    color: #6c71c4;
-}
-
-
-#custom-keyboard {
-    color: #a6799d;
-}
+/* #memory { */
+/*     color: #2aa198; */
+/* } */
+/**/
+/* #cpu { */
+/*     color: #6c71c4; */
+/* } */
+/**/
+/**/
+/* #custom-keyboard { */
+/*     color: #a6799d; */
+/* } */
 
 /* End of base style.css */
